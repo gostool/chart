@@ -1,3 +1,6 @@
+# helm redis
+[官方chart](https://artifacthub.io/packages/helm/bitnami/redis)
+
 ## helm redis
 * 添加仓库
 * install
