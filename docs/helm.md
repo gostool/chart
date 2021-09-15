@@ -1,11 +1,10 @@
-# helm
-想成功和正确地使用Helm，需要以下前置条件。
-* 一个 Kubernetes 集群
-* 确定你安装版本的安全配置
-* 安装和配置Helm。
-* 基本命令
+# helm  
+想成功和正确地使用Helm，需要一个k8s集群.
+[官方快速开始](https://helm.sh/zh/docs/intro/quickstart/)
 
-[快速开始](https://helm.sh/zh/docs/intro/quickstart/)
+* 选择正确的版本
+* 配置源
+* 基本命令
 
 ## 版本选择
 [参考](https://helm.sh/zh/docs/topics/version_skew/)
@@ -130,7 +129,7 @@ ubuntu@VM-4-8-ubuntu:~/apps/chart$e
 ```
 
 
-roback: 
+rollback: 
 chart:redis  
 版本:1
 ```
