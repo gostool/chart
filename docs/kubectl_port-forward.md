@@ -1,5 +1,12 @@
 ## port-forward 模式访问
 
+使用端口转发来访问集群中的应用
+
+[官方](https://kubernetes.io/zh/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
+
+[命令demo](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#port-forward)
+
+
 * 安装deis-workflow 
 * 在k8s集群外访问
 * 在公网访问.(防火墙开启)
@@ -91,3 +98,6 @@ ubuntu@VM-4-8-ubuntu:~$
 ```
 kubectl --namespace default port-forward --address 0.0.0.0 $POD_NAME  8080:$CONTAINER_PORT
 ```
+
+
+![](https://oscimg.oschina.net/oscnet/up-ca67581697f48acaf964da2a56d61f1cc40.png)
