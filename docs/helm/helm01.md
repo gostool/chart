@@ -2,6 +2,9 @@
 想成功和正确地使用Helm，需要一个k8s集群.
 [官方快速开始](https://helm.sh/zh/docs/intro/quickstart/)
 
+[官方chart](https://artifacthub.io/packages/helm/bitnami/redis)
+
+
 * 选择正确的版本
 * 配置源
 * 基本命令
