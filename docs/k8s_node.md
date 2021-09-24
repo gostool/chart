@@ -223,6 +223,55 @@ ubuntu@VM-4-8-ubuntu:~$
 ```
 
 
+```
+ubuntu@VM-4-8-ubuntu:~$ kubectl describe pod nginx-deployment-7fb7fd49b4-h8ds7
+Name:         nginx-deployment-7fb7fd49b4-h8ds7
+Namespace:    default
+Priority:     0
+Node:         minikube/192.168.49.2
+Start Time:   Tue, 14 Sep 2021 15:03:52 +0800
+Labels:       app=nginx
+              pod-template-hash=7fb7fd49b4
+Annotations:  <none>
+Status:       Running
+IP:           172.17.0.8
+IPs:
+  IP:           172.17.0.8
+Controlled By:  ReplicaSet/nginx-deployment-7fb7fd49b4
+Containers:
+  nginx:
+    Container ID:   docker://70e3d1813107ac8815f66df3a930de5ee2ca2e80a1b16bc3ffdcddd3170991bf
+    Image:          nginx:alpine
+    Image ID:       docker-pullable://nginx@sha256:686aac2769fd6e7bab67663fd38750c135b72d993d0bb0a942ab02ef647fc9c3
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Tue, 14 Sep 2021 15:03:53 +0800
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from default-token-x5c76 (ro)
+Conditions:
+  Type              Status
+  Initialized       True
+  Ready             True
+  ContainersReady   True
+  PodScheduled      True
+Volumes:
+  default-token-x5c76:
+    Type:        Secret (a volume populated by a Secret)
+    SecretName:  default-token-x5c76
+    Optional:    false
+QoS Class:       BestEffort
+Node-Selectors:  <none>
+Tolerations:     node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                 node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:          <none>
+ubuntu@VM-4-8-ubuntu:~$
+```
+
+
 
 
 
