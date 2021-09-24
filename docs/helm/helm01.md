@@ -76,11 +76,12 @@ stable/mariadb               	2.1.6        	10.1.31    	Fast, reliable, scalable
 ```
 
 ## helm 基本命令
-* 查看
-* 安装
-* 删除
+* 查看: helm search
+* 安装: helm install
+* 删除: helm delete
 * rollback 恢复
 
+### helm mysql 安装/删除/恢复
 ```
 ubuntu@VM-4-8-ubuntu:~/apps/chart$ helm install mysql  bitnami/mysql -n db
 NAME: mysql
@@ -123,27 +124,38 @@ To upgrade this helm chart:
 
       ROOT_PASSWORD=$(kubectl get secret --namespace db mysql -o jsonpath="{.data.mysql-root-password}" | base64 --decode)
       helm upgrade --namespace db mysql bitnami/mysql --set auth.rootPassword=$ROOT_PASSWORD
+```
+
+list:
+```
 ubuntu@VM-4-8-ubuntu:~/apps/chart$ helm list -n db
 NAME 	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART      	APP VERSION
 mysql	db       	1       	2021-09-15 17:15:19.396058159 +0800 CST	deployed	mysql-8.8.7	8.0.26
+```
+
+delete:
+```
 ubuntu@VM-4-8-ubuntu:~/apps/chart$ helm delete mysql -n db
 release "mysql" uninstalled
 ubuntu@VM-4-8-ubuntu:~/apps/chart$e
 ```
 
-
+后期改一下
 rollback: 
 chart:redis  
 版本:1
 ```
-ubuntu@VM-4-8-ubuntu:~$ helm list -n db
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm  list -n db
 NAME 	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART       	APP VERSION
-redis	db       	1       	2021-09-15 17:57:14.547234519 +0800 CST	deployed	redis-15.3.2	6.2.5
-ubuntu@VM-4-8-ubuntu:~$ helm uninstall redis --keep-history -n db
-release "redis" uninstalled
-ubuntu@VM-4-8-ubuntu:~$ helm list -n db
-NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
-ubuntu@VM-4-8-ubuntu:~$ helm rollback redis 1 -n db
+mysql	db       	1       	2021-09-24 16:55:19.537550603 +0800 CST	deployed	mysql-8.8.7 	8.0.26
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm uninstall mysql --keep-history -n db
+release "mysql" uninstalled
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm list -n db
+NAME 	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART       	APP VERSION
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm rollback mysql 1 -n db
 Rollback was a success! Happy Helming!
-ubuntu@VM-4-8-ubuntu:~$
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm list -n db
+NAME 	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART       	APP VERSION
+mysql	db       	2       	2021-09-24 16:56:34.311259388 +0800 CST	deployed	mysql-8.8.7 	8.0.26
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$
 ```
