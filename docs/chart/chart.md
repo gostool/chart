@@ -60,3 +60,94 @@ deprecated: 不被推荐的chart （可选，布尔值）
 annotations:
   example: 按名称输入的批注列表 （可选）.
 ```
+
+## helm create mychart
+* 创建chart
+* 安装
+
+```
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm create mychart
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ tree mychart/
+mychart/
+├── Chart.yaml
+├── templates
+│   ├── NOTES.txt
+│   ├── _helpers.tpl
+│   ├── deployment.yaml
+│   ├── hpa.yaml
+│   ├── ingress.yaml
+│   ├── service.yaml
+│   ├── serviceaccount.yaml
+│   └── tests
+│       └── test-connection.yaml
+└── values.yaml
+
+2 directories, 10 files
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm ls
+NAME         	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART              	APP VERSION
+deis-workflow	default  	1       	2021-09-15 18:24:02.256027486 +0800 CST	deployed	deis-workflow-0.1.0	1.16.0
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm  install mychart ./mychart/
+NAME: mychart
+LAST DEPLOYED: Fri Sep 24 17:25:56 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=mychart,app.kubernetes.io/instance=mychart" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm ls
+NAME         	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART              	APP VERSION
+deis-workflow	default  	1       	2021-09-15 18:24:02.256027486 +0800 CST	deployed	deis-workflow-0.1.0	1.16.0
+mychart      	default  	1       	2021-09-24 17:25:56.633330062 +0800 CST	deployed	mychart-0.1.0      	1.16.0
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=mychart,app.kubernetes.io/instance=mychart" -o jsonpath="{.items[0].metadata.name}")
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$  echo "Visit http://127.0.0.1:8080 to use your application"
+Visit http://127.0.0.1:8080 to use your application
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ kubectl --namespace default --address 0.0.0.0  port-forward $POD_NAME 8080:$CONTAINER_PORT
+Forwarding from 0.0.0.0:8080 -> 80
+Handling connection for 8080
+Handling connection for 8080
+^C
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$
+```
+
+
+修改Chart.yaml 版本号. helm update
+
+```sh
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ git pull
+remote: Enumerating objects: 11, done.
+remote: Counting objects: 100% (11/11), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 6 (delta 4), reused 6 (delta 4), pack-reused 0
+Unpacking objects: 100% (6/6), done.
+From github.com:gostool/chart
+   e70fbb1..d7a2fd3  dev        -> origin/dev
+Updating e70fbb1..d7a2fd3
+Fast-forward
+ k8s/char/mychart/Chart.yaml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$  helm upgrade mychart ./mychart/
+Release "mychart" has been upgraded. Happy Helming!
+NAME: mychart
+LAST DEPLOYED: Fri Sep 24 17:34:10 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 3
+NOTES:
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace default -l "app.kubernetes.io/name=mychart,app.kubernetes.io/instance=mychart" -o jsonpath="{.items[0].metadata.name}")
+  export CONTAINER_PORT=$(kubectl get pod --namespace default $POD_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  echo "Visit http://127.0.0.1:8080 to use your application"
+  kubectl --namespace default port-forward --address 0.0.0.0 $POD_NAME 8080:$CONTAINER_PORT
+  echo "Visit http://ip:8080 to use your application"
+  kubectl --namespace default port-forward $POD_NAME 8080:$CONTAINER_PORT
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$ helm ls
+NAME         	NAMESPACE	REVISION	UPDATED                                	STATUS  	CHART              	APP VERSION
+deis-workflow	default  	1       	2021-09-15 18:24:02.256027486 +0800 CST	deployed	deis-workflow-0.1.0	1.16.0
+mychart      	default  	3       	2021-09-24 17:34:10.682504572 +0800 CST	deployed	mychart-0.1.0      	1.16.1
+ubuntu@VM-4-8-ubuntu:~/apps/chart/k8s/char$
+```
