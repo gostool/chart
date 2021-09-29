@@ -27,3 +27,9 @@ spec:
       mountPath: /pod-data
     command: ["/bin/sh"]
     args: ["-c", "while true; do sleep 1; date >> /pod-data/index.html;done"]
+
+
+## 
+# 访问方式: kubectl port-forward --address 0.0.0.0 pod/two-conainters  8080:80
+# k8s.pyhuo.top:8080
+##
