@@ -18,8 +18,8 @@ spec:
     volumeMounts:
     - name: shared-data
       mountPath: /usr/share/nginx/html
-  - name: debian-containers
-    image: debain
+  - name: ubuntu-containers
+    image: ubuntu:apline
     volumeMounts:
     - name: shared-data
       mountPath: /pod-data
