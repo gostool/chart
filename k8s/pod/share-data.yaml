@@ -26,4 +26,4 @@ spec:
     - name: shared-data
       mountPath: /pod-data
     command: ["/bin/sh"]
-    args: ["-c", "while true; do sleep 1; echo i_am_a_container > /pod-data/index.html;done"]
+    args: ["-c", "while true; do sleep 1; date >> /pod-data/index.html;done"]
