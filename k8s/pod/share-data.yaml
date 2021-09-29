@@ -1,0 +1,27 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "two-conainters"
+  namespace: default
+  labels:
+    app: "two-conainters"
+spec:
+  restartPolicy: Never
+  volumes:
+  - name: shared-data
+    hostPath:
+      path: /home/ubuntu/apps/data
+  containers:
+  - name: nginx-containers
+    image: nginx:alpine
+    volumeMounts:
+    - name: shared-data
+      mountPath: /usr/share/nginx/html
+  - name: debian-containers
+    image: debain
+    volumeMounts:
+    - name: shared-data
+      mountPath: /pod-data
+    command: ["/bin/sh"]
+    args: ["-c", "echo hello > /pod-data/index.html"]
