@@ -2,10 +2,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "two-conainters"
+  name: "two-containers"
   namespace: default
   labels:
-    app: "two-conainters"
+    app: "two-containers"
 spec:
   restartPolicy: Never
   volumes:
