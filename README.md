@@ -6,6 +6,8 @@ helm chart stu
 * pod, depolyment, service, ingress 使用
 * helm + chart
 
+pod/容器设计模式:Init Container
+
 # 资料
 [官方](https://helm.sh/zh/docs/topics/charts/)
 
