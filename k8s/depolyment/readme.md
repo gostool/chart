@@ -91,3 +91,46 @@ myapp           3/3     1            3           30m   myapp           nginx:1.1
 mychart         1/1     1            1           17d   mychart         nginx:1.16.1   app.kubernetes.io/instance=mychart,app.kubernetes.io/name=mychart
 ➜  depolyment git:(dev)
 ```
+
+## 回滚镜像
+* rollout:
+* history: 查看版本
+
+```
+➜  depolyment git:(dev) kubectl get deployment -o wide
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS      IMAGES         SELECTOR
+deis-workflow   1/1     1            1           26d   deis-workflow   nginx:1.16.0   app.kubernetes.io/instance=deis-workflow,app.kubernetes.io/name=deis-workflow
+myapp           3/3     3            3           24m   myapp           nginx:1.16.1   app=myapp
+mychart         1/1     1            1           17d   mychart         nginx:1.16.1   app.kubernetes.io/instance=mychart,app.kubernetes.io/name=mychart
+➜  depolyment git:(dev) kubectl rollout history deployment/myapp
+deployment.apps/myapp
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+
+➜  depolyment git:(dev) kubectl rollout history deployment/myapp --revision=1
+deployment.apps/myapp with revision #1
+Pod Template:
+  Labels:	app=myapp
+	pod-template-hash=758c55b554
+  Containers:
+   myapp:
+    Image:	nginx:alpine
+    Port:	80/TCP
+    Host Port:	0/TCP
+    Limits:
+      cpu:	100m
+      memory:	128Mi
+    Environment:	<none>
+    Mounts:	<none>
+  Volumes:	<none>
+
+➜  depolyment git:(dev) kubectl rollout undo deployment/myapp  --to-revision=1
+deployment.apps/myapp rolled back
+➜  depolyment git:(dev) kubectl get deployment -o wide
+NAME            READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS      IMAGES         SELECTOR
+deis-workflow   1/1     1            1           26d   deis-workflow   nginx:1.16.0   app.kubernetes.io/instance=deis-workflow,app.kubernetes.io/name=deis-workflow
+myapp           3/3     3            3           25m   myapp           nginx:alpine   app=myapp
+mychart         1/1     1            1           17d   mychart         nginx:1.16.1   app.kubernetes.io/instance=mychart,app.kubernetes.io/name=mychart
+➜  depolyment git:(dev)
+```
