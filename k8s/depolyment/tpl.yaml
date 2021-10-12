@@ -23,7 +23,9 @@ spec:
         resources:
           limits:
             memory: "128Mi"
-            cpu: "500m"
+            # 单位后缀 m 表示千分之一核，也就是说 1 Core = 1000m
+            # 10% * 3 = 30%
+            cpu: "100m"
         ports:
         - containerPort: 80
 
