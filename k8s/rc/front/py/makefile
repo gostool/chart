@@ -3,7 +3,7 @@ BINARY = app.py
 # 禁止使用hub.docker.com 必须使用私有仓库
 DOCKER_HUB = registry.cn-beijing.aliyuncs.com
 NAMESPACE = hyhbackend
-VERSION = 0.1
+VERSION = 0.2
 TAG = $(VERSION)
 TAG_CMD = $(VE8SION_CMD)
 # 必须小写
