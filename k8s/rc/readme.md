@@ -260,4 +260,5 @@ kubectl delete -f rc/redis-master-controller.yaml
 * frontend 镜像中获取: redis-master 服务地址， redis-slave 服务地址
 * frontend 镜像中访问:redis. 
 * frontend 镜像中完成redis: 读写分离
+* redis 服务持久化
 
