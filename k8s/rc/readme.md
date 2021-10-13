@@ -1,14 +1,75 @@
 ## rc
-* 创建rc
 
-k8s权威指南第四版 第一章
+目标 k8s权威指南第四版 第一章 php 留言板功能
+rc:
+* redis-master
+* redis-slave
+* frontend(php): 使用frontend(py替代)
 
-删除
+service:
+* redis-server
+* redis-slave
+
+架构图:(todo图)
+
+
+
+访问: (port-forward模式)
 ```
-kubectl delete -n default replicationcontroller redis-slave
+export POD_NAME=$(kubectl get pods --namespace default -l "app=frontend" -o jsonpath="{.items[0].metadata.name}")
+
+kubectl --namespace default  port-forward --address 0.0.0.0 ${POD_NAME}  8080:8080
 ```
 
-## redis-master
+### 删除
+
+删除：
+```
+kubectl delete -f rc/frontend-controller.yaml
+
+kubectl delete -f service/redis-slave-service.yaml
+kubectl delete -f serviceredis-master-service.yaml
+
+kubectl delete -f rc/redis-slave-controller.yaml
+kubectl delete -f rc/redis-master-controller.yaml
+```
+
+### 启动整个服务
+rc:
+* redis-master
+* redis-slave
+* front
+
+service:
+* redis-master
+* redis-slave
+
+启动:
+```
+kubectl apply -f rc/redis-master-controller.yaml
+kubectl apply -f service/redis-master-service.yaml
+
+kubectl apply -f rc/redis-slave-controller.yaml
+kubectl apply -f service/redis-slave-service.yaml
+
+kubectl apply -f rc/frontend-controller.yaml
+```
+
+### 查看运行状态
+
+查看状态:
+```
+➜  k8s git:(dev) kubectl get rc -o wide
+NAME           DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES                             SELECTOR
+frontend       3         3         1       8s    frontend     kubeguide/guestbook-php-frontend   app=frontend
+redis-master   1         1         1       35s   master       kubeguide/redis-master             app=redis-master
+redis-slave    2         2         2       25s   slave        kubeguide/guestbook-redis-slave    app=redis-slave
+➜  k8s git:(dev)
+```
+
+## redis 主从模式的调试
+* master 节点调试
+### redis-master
 
 ```
 ➜  rc git:(dev) kubectl apply -f redis-master-controller.yaml
@@ -179,48 +240,10 @@ root@redis-slave-5km7z:/data# redis-server --port 26379 --slaveof ${REDIS_MASTER
 
 ```
 
-## 启动整个服务
-rc:
-* redis-master
-* redis-slave
-* front
-
-service:
-* redis-master
-* redis-slave
-
-php-front:
-```
-kubectl apply -f rc/redis-master-controller.yaml
-kubectl apply -f service/redis-master-service.yaml
-
-kubectl apply -f rc/redis-slave-controller.yaml
-kubectl apply -f service/redis-slave-service.yaml
-
-kubectl apply -f rc/frontend-controller.yaml
-```
-
-查看状态:
-```
-➜  k8s git:(dev) kubectl get rc -o wide
-NAME           DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES                             SELECTOR
-frontend       3         3         1       8s    frontend     kubeguide/guestbook-php-frontend   app=frontend
-redis-master   1         1         1       35s   master       kubeguide/redis-master             app=redis-master
-redis-slave    2         2         2       25s   slave        kubeguide/guestbook-redis-slave    app=redis-slave
-➜  k8s git:(dev)
-```
 
 
-```
-php:      app1,      app2,       app3
-          |         /     \        |  
-          |        /       \       |
-db:
-        write                     read
-          |                         |
-          |               sync      |
-       redis-master      -->     redis-slave1 redis-slave2
-```
+
+
 
 创建php front:
 ```
@@ -239,20 +262,7 @@ redis-slave    2         2         2       93s
 ```
 
 
-访问:
 
-```
-export POD_NAME=$(kubectl get pods --namespace default -l "app=frontend" -o jsonpath="{.items[0].metadata.name}")
-
-kubectl --namespace default  port-forward --address 0.0.0.0 ${POD_NAME}  8080:8080
-```
-
-删除：
-```
-kubectl delete -f rc/frontend-controller.yaml
-kubectl delete -f rc/redis-slave-controller.yaml
-kubectl delete -f rc/redis-master-controller.yaml
-```
 
 
 ## todo
