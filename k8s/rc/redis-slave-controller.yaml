@@ -17,6 +17,6 @@ spec:
           image: kubeguide/guestbook-redis-slave
           ports:
             - containerPort: 6379
-          # env:
-          # - name: GET_HOSTS_FROM
-          #   value: env
+          env:
+          - name: GET_HOSTS_FROM
+            value: env

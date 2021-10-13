@@ -179,3 +179,52 @@ root@redis-slave-5km7z:/data# redis-server --port 26379 --slaveof ${REDIS_MASTER
 
 ```
 
+php-front:
+```
+➜  k8s git:(dev) kubectl apply -f rc/redis-master-controller.yaml
+replicationcontroller/redis-master created
+➜  k8s git:(dev) kubectl apply -f rc/redis-slave-controller.yaml
+replicationcontroller/redis-slave created
+➜  k8s git:(dev) kubectl apply -f rc/frontend-controller.yaml
+replicationcontroller/frontend created
+➜  k8s git:(dev) kubectl get rc -o wide
+NAME           DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES                             SELECTOR
+frontend       3         3         1       8s    frontend     kubeguide/guestbook-php-frontend   app=frontend
+redis-master   1         1         1       35s   master       kubeguide/redis-master             app=redis-master
+redis-slave    2         2         2       25s   slave        kubeguide/guestbook-redis-slave    app=redis-slave
+➜  k8s git:(dev)
+```
+
+```
+php:      app1,      app2,       app3
+          |         /     \        |  
+          |        /       \       |
+db:
+        write                     read
+          |                         |
+          |               sync      |
+       redis-master      -->     redis-slave1 redis-slave2
+```创建php front:
+```
+➜  k8s git:(dev) kubectl apply -f rc/frontend-controller.yaml -n php
+replicationcontroller/frontend created
+```
+
+检查redis主从，php状态
+```
+➜  k8s git:(dev) kubectl get rc -n php
+NAME           DESIRED   CURRENT   READY   AGE
+frontend       3         3         0       6s
+redis-master   1         1         1       3m5s
+redis-slave    2         2         2       93s
+➜  k8s git:(dev)
+```
+
+
+访问:
+```
+export POD_NAME=$(kubectl get pods --namespace default -l "app=frontend" -o jsonpath="{.items[0].metadata.name}")
+kubectl --namespace default  port-forward --address 0.0.0.0 ${POD_NAME}  8080:80
+```
+
+
