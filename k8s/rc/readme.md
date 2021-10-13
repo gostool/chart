@@ -3,6 +3,11 @@
 
 k8s权威指南第四版 第一章
 
+删除
+```
+kubectl delete -n default replicationcontroller redis-slave
+```
+
 ## redis-master
 
 ```
@@ -72,8 +77,19 @@ Examples:
 Sentinel mode:
        ./redis-server /etc/sentinel.conf --sentinel
 ```
+
 使用已知redis-service ip:
 ```
+root@redis-slave-7b99r:/opt# curl -v 10.99.241.216:6379
+* About to connect() to 10.99.241.216 port 6379 (#0)
+*   Trying 10.99.241.216...
+* connected
+* Connected to 10.99.241.216 (10.99.241.216) port 6379 (#0)
+> GET / HTTP/1.1
+> User-Agent: curl/7.26.0
+> Host: 10.99.241.216:6379
+> Accept: */*
+> 
 root@redis-slave-5km7z:/data# redis-server --port 26379 --slaveof 10.99.241.216  6379
                 _._                                                  
            _.-``__ ''-._                                             
