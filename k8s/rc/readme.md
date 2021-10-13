@@ -179,6 +179,11 @@ root@redis-slave-5km7z:/data# redis-server --port 26379 --slaveof ${REDIS_MASTER
 
 ```
 
+## 启动整个服务
+* redis-master
+* redis-slave
+* front
+
 php-front:
 ```
 ➜  k8s git:(dev) kubectl apply -f rc/redis-master-controller.yaml
@@ -206,13 +211,13 @@ db:
        redis-master      -->     redis-slave1 redis-slave2
 ```创建php front:
 ```
-➜  k8s git:(dev) kubectl apply -f rc/frontend-controller.yaml -n php
+➜  k8s git:(dev) kubectl apply -f rc/frontend-controller.yaml 
 replicationcontroller/frontend created
 ```
 
 检查redis主从，php状态
 ```
-➜  k8s git:(dev) kubectl get rc -n php
+➜  k8s git:(dev) kubectl get rc 
 NAME           DESIRED   CURRENT   READY   AGE
 frontend       3         3         0       6s
 redis-master   1         1         1       3m5s
@@ -226,5 +231,14 @@ redis-slave    2         2         2       93s
 export POD_NAME=$(kubectl get pods --namespace default -l "app=frontend" -o jsonpath="{.items[0].metadata.name}")
 kubectl --namespace default  port-forward --address 0.0.0.0 ${POD_NAME}  8080:80
 ```
+php 访问redis 异常. 后续使用python/go做一个镜像测试
 
 
+
+
+删除：
+```
+kubectl delete -f rc/frontend-controller.yaml
+kubectl delete -f rc/redis-slave-controller.yaml
+kubectl delete -f rc/redis-master-controller.yaml
+```
