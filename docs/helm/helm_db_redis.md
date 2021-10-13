@@ -14,6 +14,85 @@ bitnami/redis-cluster	6.3.6        	6.2.5      	Open source, advanced key-value 
 ubuntu@VM-4-8-ubuntu:~/apps/k8s/redis$
 ```
 
+下载
+```
+➜  char git:(dev) ✗ helm pull bitnami/redis --untar
+➜  char git:(dev) ✗ tree redis 
+redis
+├── Chart.lock
+├── Chart.yaml
+├── README.md
+├── charts
+│   └── common
+│       ├── Chart.yaml
+│       ├── README.md
+│       ├── templates
+│       │   ├── _affinities.tpl
+│       │   ├── _capabilities.tpl
+│       │   ├── _errors.tpl
+│       │   ├── _images.tpl
+│       │   ├── _ingress.tpl
+│       │   ├── _labels.tpl
+│       │   ├── _names.tpl
+│       │   ├── _secrets.tpl
+│       │   ├── _storage.tpl
+│       │   ├── _tplvalues.tpl
+│       │   ├── _utils.tpl
+│       │   ├── _warnings.tpl
+│       │   └── validations
+│       │       ├── _cassandra.tpl
+│       │       ├── _mariadb.tpl
+│       │       ├── _mongodb.tpl
+│       │       ├── _postgresql.tpl
+│       │       ├── _redis.tpl
+│       │       └── _validations.tpl
+│       └── values.yaml
+├── ci
+│   ├── extra-flags-values.yaml
+│   ├── sentinel-values.yaml
+│   └── standalone-values.yaml
+├── img
+│   ├── redis-cluster-topology.png
+│   └── redis-topology.png
+├── templates
+│   ├── NOTES.txt
+│   ├── _helpers.tpl
+│   ├── configmap.yaml
+│   ├── extra-list.yaml
+│   ├── headless-svc.yaml
+│   ├── health-configmap.yaml
+│   ├── master
+│   │   ├── psp.yaml
+│   │   ├── service.yaml
+│   │   └── statefulset.yaml
+│   ├── metrics-svc.yaml
+│   ├── networkpolicy.yaml
+│   ├── pdb.yaml
+│   ├── prometheusrule.yaml
+│   ├── replicas
+│   │   ├── hpa.yaml
+│   │   ├── service.yaml
+│   │   └── statefulset.yaml
+│   ├── role.yaml
+│   ├── rolebinding.yaml
+│   ├── scripts-configmap.yaml
+│   ├── secret.yaml
+│   ├── sentinel
+│   │   ├── hpa.yaml
+│   │   ├── node-services.yaml
+│   │   ├── ports-configmap.yaml
+│   │   ├── service.yaml
+│   │   └── statefulset.yaml
+│   ├── serviceaccount.yaml
+│   ├── servicemonitor.yaml
+│   └── tls-secret.yaml
+├── values.schema.json
+└── values.yaml
+
+10 directories, 59 files
+➜  char git:(dev) ✗ 
+```
+
 ### install
 
 ```

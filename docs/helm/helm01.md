@@ -77,11 +77,79 @@ stable/mariadb               	2.1.6        	10.1.31    	Fast, reliable, scalable
 
 ## helm 基本命令
 * 查看: helm search
+* 下载: helm pull
 * 安装: helm install
 * 删除: helm delete
 * rollback 恢复
 
-### helm mysql 安装/删除/恢复
+### helm mysql 下载/安装/删除/恢复
+
+下载并解压:
+```
+➜  char git:(dev) ✗ helm pull bitnami/mysql --untar
+➜  char git:(dev) ✗ tree mysql 
+mysql
+├── Chart.lock
+├── Chart.yaml
+├── README.md
+├── charts
+│   └── common
+│       ├── Chart.yaml
+│       ├── README.md
+│       ├── templates
+│       │   ├── _affinities.tpl
+│       │   ├── _capabilities.tpl
+│       │   ├── _errors.tpl
+│       │   ├── _images.tpl
+│       │   ├── _ingress.tpl
+│       │   ├── _labels.tpl
+│       │   ├── _names.tpl
+│       │   ├── _secrets.tpl
+│       │   ├── _storage.tpl
+│       │   ├── _tplvalues.tpl
+│       │   ├── _utils.tpl
+│       │   ├── _warnings.tpl
+│       │   └── validations
+│       │       ├── _cassandra.tpl
+│       │       ├── _mariadb.tpl
+│       │       ├── _mongodb.tpl
+│       │       ├── _postgresql.tpl
+│       │       ├── _redis.tpl
+│       │       └── _validations.tpl
+│       └── values.yaml
+├── ci
+│   └── values-production-with-rbac.yaml
+├── templates
+│   ├── NOTES.txt
+│   ├── _helpers.tpl
+│   ├── extra-list.yaml
+│   ├── metrics-svc.yaml
+│   ├── networkpolicy.yaml
+│   ├── primary
+│   │   ├── configmap.yaml
+│   │   ├── initialization-configmap.yaml
+│   │   ├── pdb.yaml
+│   │   ├── statefulset.yaml
+│   │   ├── svc-headless.yaml
+│   │   └── svc.yaml
+│   ├── role.yaml
+│   ├── rolebinding.yaml
+│   ├── secondary
+│   │   ├── configmap.yaml
+│   │   ├── pdb.yaml
+│   │   ├── statefulset.yaml
+│   │   ├── svc-headless.yaml
+│   │   └── svc.yaml
+│   ├── secrets.yaml
+│   ├── serviceaccount.yaml
+│   └── servicemonitor.yaml
+├── values.schema.json
+└── values.yaml
+
+8 directories, 48 files
+➜  char git:(dev) ✗
+```
+
 ```
 ubuntu@VM-4-8-ubuntu:~/apps/chart$ helm install mysql  bitnami/mysql -n db
 NAME: mysql
