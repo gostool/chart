@@ -16,4 +16,4 @@ spec:
         - name: frontend
           image: registry.cn-beijing.aliyuncs.com/hyhbackend/flaskweb:0.1
           ports:
-            - containerPort: 80
+            - containerPort: 8080

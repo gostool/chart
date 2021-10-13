@@ -23,4 +23,4 @@ img:
 	docker push $(IMG_FULL_NAME)
 
 imgR:
-	docker run --rm -it -p 8080:8888 $(IMG_FULL_NAME)
+	docker run --rm -it -p 8080:8080 $(IMG_FULL_NAME)

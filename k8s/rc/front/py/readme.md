@@ -49,9 +49,9 @@ dabfe5b2ea81: Layer already exists
 
 ```
 (venv) ➜  py git:(dev) make imgR
-docker run --rm -it -p 8080:8888 registry.cn-beijing.aliyuncs.com/hyhbackend/flaskweb:0.1
+docker run --rm -it -p 8080:8080 registry.cn-beijing.aliyuncs.com/hyhbackend/flaskweb:0.1
 [2021-10-13 06:41:56 +0000] [1] [INFO] Starting gunicorn 20.1.0
-[2021-10-13 06:41:56 +0000] [1] [INFO] Listening at: http://0.0.0.0:8888 (1)
+[2021-10-13 06:41:56 +0000] [1] [INFO] Listening at: http://0.0.0.0:8080 (1)
 [2021-10-13 06:41:56 +0000] [1] [INFO] Using worker: sync
 [2021-10-13 06:41:56 +0000] [6] [INFO] Booting worker with pid: 6
 [2021-10-13 06:41:56 +0000] [7] [INFO] Booting worker with pid: 7
