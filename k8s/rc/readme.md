@@ -192,7 +192,11 @@ service:
 php-front:
 ```
 kubectl apply -f rc/redis-master-controller.yaml
+kubectl apply -f service/redis-master-service.yaml
+
 kubectl apply -f rc/redis-slave-controller.yaml
+kubectl apply -f service/redis-slave-service.yaml
+
 kubectl apply -f rc/frontend-controller.yaml
 ```
 
@@ -216,7 +220,9 @@ db:
           |                         |
           |               sync      |
        redis-master      -->     redis-slave1 redis-slave2
-```创建php front:
+```
+
+创建php front:
 ```
 ➜  k8s git:(dev) kubectl apply -f rc/frontend-controller.yaml 
 replicationcontroller/frontend created
@@ -234,14 +240,12 @@ redis-slave    2         2         2       93s
 
 
 访问:
+
 ```
 export POD_NAME=$(kubectl get pods --namespace default -l "app=frontend" -o jsonpath="{.items[0].metadata.name}")
+
 kubectl --namespace default  port-forward --address 0.0.0.0 ${POD_NAME}  8080:8080
 ```
-php 访问redis 异常. 后续使用python/go做一个镜像测试
-
-
-
 
 删除：
 ```
@@ -249,4 +253,11 @@ kubectl delete -f rc/frontend-controller.yaml
 kubectl delete -f rc/redis-slave-controller.yaml
 kubectl delete -f rc/redis-master-controller.yaml
 ```
+
+
+## todo
+* py flask
+* frontend 镜像中获取: redis-master 服务地址， redis-slave 服务地址
+* frontend 镜像中访问:redis. 
+* frontend 镜像中完成redis: 读写分离
 
