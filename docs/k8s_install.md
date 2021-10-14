@@ -107,3 +107,21 @@ kubeadm version: &version.Info{Major:"1", Minor:"20", GitVersion:"v1.20.2", GitC
 
 
 [参考](https://www.cnblogs.com/xiao987334176/p/11317844.html)
+
+
+## 编译
+* 本地编译
+* docker编译，需要能访问外网
+
+编译cmd/kubelet:
+```
+➜  k8s.io cd kubernetes
+➜  kubernetes make clean
+➜  kubernetes KUBE_BUILD_PLATFORMS=linux/amd64 make all WHAT=cmd/kubelet GOFLAGS=-v GOGCFLAGS="-N -l"
+k8s.io/kubernetes/vendor/github.com/spf13/pflag
+k8s.io/kubernetes/hack/make-rules/helpers/go2make
++++ [1014 18:16:08] Building go targets for linux/amd64:
+    ./vendor/k8s.io/code-generator/cmd/prerelease-lifecycle-gen
+k8s.io/kubernetes/vendor/golang.org/x/mod/semver"
+... 时间较长，耐心等待
+```
