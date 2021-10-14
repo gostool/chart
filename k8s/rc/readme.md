@@ -1,5 +1,21 @@
 ## rc
 
+
+由于redis-master 服务在创建后，IP由kubernets系统自动分配，在其他的pod无法预先知道
+某个service的虚拟ip地址，因此需要一个机制来找到服务。
+
+为此，kubernets巧妙使用了linux环境变量, Kubernets 通过使用环境变量，在每个pod容器增加了一组service相关的环境变，
+用来记录从服务名到虚拟ip地址的映射关系。
+
+redis-master:
+```
+REDIS_MASTER_SERVICE_HOST
+REDIS_MASTER_SERVICE_PORT
+```
+
+
+
+
 目标 k8s权威指南第四版 第一章 php 留言板功能
 rc:
 * redis-master
