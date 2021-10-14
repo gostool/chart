@@ -126,4 +126,22 @@ k8s.io/kubernetes/vendor/golang.org/x/mod/semver"
 ... 时间较长，耐心等待
 ```
 
+```
+➜  kubernetes pwd
+/home/ubuntu/go-dev/src/k8s.io/kubernetes
+➜  kubernetes tree _output/bin
+_output/bin
+|-- conversion-gen
+|-- deepcopy-gen
+|-- defaulter-gen
+|-- go2make
+|-- go-bindata
+|-- kubelet				# 编译文件
+|-- openapi-gen
+`-- prerelease-lifecycle-gen
+
+0 directories, 8 files
+➜  kubernetes
+```
+
 
