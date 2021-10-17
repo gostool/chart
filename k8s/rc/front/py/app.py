@@ -16,6 +16,7 @@ def index():
         "master_port": master_port,
         "slave_host": slave_host,
         "slave_port": slave_port,
+        "app": "app",
     }
     return jsonify(data)
 
