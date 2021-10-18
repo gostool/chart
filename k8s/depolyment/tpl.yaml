@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  # pod 选择器
+  selector:
+    matchLabels:
+      app: myapp
+  # 期望pod数量
+  replicas: 3
+  # pod 模版
+  template:
+    metadata:
+      # 标签
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        # pod 镜像
+        image: nginx:alpine
+        resources:
+          limits:
+            memory: "128Mi"
+            # 单位后缀 m 表示千分之一核，也就是说 1 Core = 1000m
+            # 10% * 3 = 30%
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+
+# 当更新replicas 后，使用apply -f 回自动更新

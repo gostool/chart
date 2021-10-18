@@ -1,0 +1,35 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "two-containers"
+  namespace: default
+  labels:
+    app: "two-containers"
+spec:
+  restartPolicy: Never
+  volumes:
+  - name: shared-data
+    hostPath:
+      path: /home/ubuntu/apps/data
+  containers:
+  - name: nginx-containers
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: shared-data
+      mountPath: /usr/share/nginx/html
+  - name: ubuntu-containers
+    image: ubuntu
+    volumeMounts:
+    - name: shared-data
+      mountPath: /pod-data
+    command: ["/bin/sh"]
+    args: ["-c", "while true; do sleep 1; date >> /pod-data/index.html;done"]
+
+
+## 
+# 访问方式: kubectl port-forward --address 0.0.0.0 pod/two-conainters  8080:80
+# k8s.pyhuo.top:8080
+##
