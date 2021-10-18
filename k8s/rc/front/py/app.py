@@ -26,6 +26,7 @@ def setData(key, value):
 def getData(key):
     r = redis.StrictRedis(host=master_host, port=master_port)
     data = r.get(key)
+    data = data.decode('utf8')
     return jsonify(data)
 
 
