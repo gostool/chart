@@ -23,3 +23,6 @@ img:
 
 imgR:
 	docker run --rm -it -p 5000:5000 $(IMG_FULL_NAME)
+
+imgRL:
+	docker run --rm -it --network=host  $(IMG_FULL_NAME)
