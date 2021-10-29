@@ -1,0 +1,19 @@
+{
+	"message":"Operation success",
+	"code":200,
+	"success":true,
+	"data":{
+		"mapId":"1422459356488323074",
+		"shareUrl":"https://share.fengmap.com?m=1422459356488323074&t=1423234385392267266",
+		"revJson":null,
+		"userName":"13152051317",
+		"themeId":"1423234385392267266",
+		"delFlag":0,
+		"shareCount":10,
+		"likedCount":0,
+		"qrcodeUrl":null,
+		"createTime":1628650768750,
+		"tctime":1628160494544,
+		"mctime":1627975713258
+	}
+}
