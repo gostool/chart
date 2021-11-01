@@ -1,0 +1,16 @@
+# 并行job
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: paral-myjob
+spec:
+  completions: 8
+  parallelims: 2
+  template:
+    spec:
+      containers:
+      - name: param
+        image: ubuntu
+        command: ["/bin/sh"]
+        args: ["-c", "sleep 30; date"]
+      restartPolicy: OnFailure
