@@ -7,7 +7,7 @@ metadata:
 
 spec:
   selector:
-    app: mtaskQueue
+    app: taskQueue
     component: flower 
   ports:
   - port: 5555
