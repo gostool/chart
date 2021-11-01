@@ -12,3 +12,5 @@ spec:
   ports:
   - port: 5555
     targetPort: 5555
+
+#  kubectl --namespace default port-forward --address 0.0.0.0  service/flower-service 8080:5555
