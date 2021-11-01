@@ -58,3 +58,28 @@ spec:
 
 
 对于 非并行 的 Job，你可以不设置 spec.completions 和 spec.parallelism。 这两个属性都不设置时，均取默认值 1
+
+
+
+### 并行job
+* 同时有2个任务执行.
+
+```
+➜  k8s git:(dev) ✗ kubectl apply -f job/paral-job.yaml
+job.batch/paral-myjob created
+➜  k8s git:(dev) ✗ kubectl get job
+NAME          COMPLETIONS   DURATION   AGE
+paral-myjob   0/8           4s         4s
+➜  k8s git:(dev) ✗
+➜  k8s git:(dev) ✗ kubectl get pod
+NAME                        READY   STATUS      RESTARTS   AGE
+paral-myjob-2ckql           0/1     Completed   0          100s
+paral-myjob-5rgtm           0/1     Completed   0          62s
+paral-myjob-7f465           0/1     Completed   0          97s
+paral-myjob-8wf4v           0/1     Completed   0          2m14s
+paral-myjob-g4blw           0/1     Completed   0          65s
+paral-myjob-gbrx5           1/1     Running     0          29s
+paral-myjob-nx9w9           1/1     Running     0          27s
+paral-myjob-vnvhm           0/1     Completed   0          2m14s
+➜  k8s git:(dev) ✗
+```
