@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+
+  redis-server:
+    image: "redis"
+
+  backend:
+    environment:
+      - REDIS_HOST=redis-server
+      - FLASK_ENV=development
+    build: ./backend
+#    ports:
+#      - "5000:5000"
+    volumes:
+      - ./backend/:/app/

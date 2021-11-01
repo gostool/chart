@@ -1,6 +1,7 @@
 #!flask/bin/python
 import os
 from flask import Flask, jsonify
+import redis
 
 app = Flask(__name__)
 
@@ -14,16 +15,25 @@ master_port = os.getenv('REDIS_MASTER_SERVICE_PORT', 6379)
 slave_host = os.getenv('REDIS_REPLICAS_SERVICE_HOST', 'localhost')
 slave_port = os.getenv('REDIS_REPLICAS_SERVICE_HOST', 6379)
 
-@app.route('/')
-def index():
+
+@app.route('/set/<key>/<value>')
+def setData(key, value):
+    r = redis.StrictRedis(host=master_host, port=master_port)
+    r.set(key, value)
     data = {
-        "master_host": master_host,
-        "master_port": master_port,
-        "slave_host": slave_host,
-        "slave_port": slave_port,
-        "app": "app",
+        key: value,
+        "result": "success"
     }
     return jsonify(data)
+
+
+@app.route('/get/<key>')
+def getData(key):
+    r = redis.StrictRedis(host=master_host, port=master_port)
+    data = r.get(key)
+    data = data.decode('utf8')
+    return jsonify(data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
