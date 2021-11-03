@@ -24,3 +24,34 @@ spec:
 因为不同于需要持续提供服务的pod，job中的pod在正常完成任务后，需要及时退出。
 所以pod模板中restartPolicy字段的值可以是Always,OnFailure和Never.但在Job中，该字段只能是OnFailure和Never中的一个。
 ```
+
+### job分类
+##### Non-parallel Jobs
+```
+normally only one pod is started, unless the pod fails.
+job is complete as soon as Pod terminates successfully.
+```
+##### Parallel Jobs with a fixed completion count
+```
+specify a non-zero positive value for .spec.completions
+the job is complete when there is one successful pod for each value in the range 1 to .spec.completions.
+not implemented yet: each pod passed a different index in the range 1 to .spec.completions.
+```
+##### Parallel Jobs with a work queue
+```
+do not specify .spec.completions
+the pods must coordinate with themselves or an external service to determine what each should work on
+each pod is independently capable of determining whether or not all its peers are done, thus the entire Job is done.
+when any pod terminates with success, no new pods are created.
+once at least one pod has terminated with success and all pods are terminated, then the job is completed with success.
+once any pod has exited with success, no other pod should still be doing any work or writing any output. They should all be in the process of exiting.
+For a Non-parallel job, you can leave both .spec.completions and .spec.parallelism unset. When both are unset, both are defaulted to 1.
+```
+
+```
+For a Fixed Completion Count job, you should set .spec.completions to the number of completions needed. You can set .spec.parallelism, or leave it unset and it will default to 1.
+
+For a Work Queue Job, you must leave .spec.completions unset, and set .spec.parallelism to a non-negative integer.
+
+For more information about how to make use of the different types of job, see the job patterns section.
+```
