@@ -10,6 +10,9 @@ spec:
   containers:
   - name: configmap-demo-container
     image: alpine
+    command:
+      - "sleep"
+      - "3600"
     resources:
       limits:
         cpu: 200m
