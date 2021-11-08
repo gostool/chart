@@ -10,6 +10,9 @@ spec:
   containers:
   - name: cpu-demo-ctr
     image: "vish/stress"
+    args:
+      - "-cpus"
+      - "2"
     resources:
       limits:
         cpu: "1"
