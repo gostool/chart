@@ -1,0 +1,20 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "cpu-demo"
+  namespace: default
+  labels:
+    app: "cpu-demo"
+spec:
+  containers:
+  - name: cpu-demo-ctr
+    image: "vish/stress"
+    resources:
+      limits:
+        cpu: "1"
+        memory: 100Mi
+      requests:
+        cpu: "0.5"
+        memory: 100Mi
+---
