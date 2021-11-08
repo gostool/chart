@@ -1,3 +1,7 @@
+# k8s 指南
+
+[原文](https://kubernetes.feisky.xyz/concepts/architecture)
+
 ##  Kubernetes 架构
 
 ![](https://htet.oss-cn-beijing.aliyuncs.com/upload/img/tmp/architecture.png)
@@ -46,5 +50,13 @@
 ![](https://htet.oss-cn-beijing.aliyuncs.com/upload/img/tmp/%E5%88%86%E5%B1%82.jpeg)
 
 
+## 核心组件
+
+![](https://htet.oss-cn-beijing.aliyuncs.com/upload/img/tmp/core-packages.png)
 
 
+## 核心 API
+![](https://htet.oss-cn-beijing.aliyuncs.com/upload/img/tmp/core-apis.png)
+
+## 生态系统
+![](https://htet.oss-cn-beijing.aliyuncs.com/upload/img/tmp/core-ecosystem.png)
