@@ -1,0 +1,33 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "cm-test"
+  namespace: default
+  labels:
+    app: "myapp-cm"
+spec:
+  containers:
+  - name: myapp-env-test
+    image: "busybox"
+    command: ["/bin/sh", "-c", "env"]
+    resources:
+      limits:
+        cpu: 50m
+        memory: 100Mi
+      requests:
+        cpu: 50m
+        memory: 100Mi
+    env:
+    - name: LEVEL_KEY
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: app.how
+    - name: REDIS
+      valueFrom:
+        configMapKeyRef:
+          name: app-config
+          key: app.redis
+  restartPolicy: Always
+---
