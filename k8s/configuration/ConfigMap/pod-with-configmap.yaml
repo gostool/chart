@@ -9,14 +9,14 @@ metadata:
 spec:
   containers:
   - name: configmap-demo-container
-    image: "debian-slim:latest"
+    image: alpine
     resources:
       limits:
         cpu: 200m
-        memory: 500Mi
+        memory: 50Mi
       requests:
         cpu: 100m
-        memory: 200Mi
+        memory: 20Mi
     env:
     - name: DB_HOST
       valueFrom:

@@ -29,5 +29,11 @@ ConfigMap 并不提供保密或者加密功能。 如果你想存储的数据是
 
 ### 1.1 ConfigMaps 和 Pods
 
+你可以使用四种方式来使用 ConfigMap 配置 Pod 中的容器：
+
+* 在容器命令和参数内
+* 容器的环境变量
+* 在只读卷里面添加一个文件，让应用来读取
+* 编写代码在 Pod 中运行，使用 Kubernetes API 来读取 ConfigMap
 
 

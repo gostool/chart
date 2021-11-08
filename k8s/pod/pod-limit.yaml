@@ -1,0 +1,22 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "myapp-request-limit-pod"
+  namespace: default
+  labels:
+    app: "myapp-request-limit-pod"
+spec:
+  containers:
+  - name: nginx
+    image: nginx:alpine
+    ports:
+      - containerPort: 80
+    resources:
+      limits:
+        cpu: 200m
+        memory: 50Mi
+      requests:
+        cpu: 10m
+        memory: 20Mi
+---
