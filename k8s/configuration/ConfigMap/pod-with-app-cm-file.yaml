@@ -18,7 +18,7 @@ spec:
   containers:
   - name: myapp-volume-test
     image: "busybox"
-    command: ["/bin/sh", "-c", "ls /etc/config"]
+    command: ["/bin/sh", "-c", "ls -l /etc/config"]
     resources:
       limits:
         cpu: 50m

@@ -7,6 +7,12 @@
 * 不可变更的 ConfigMap
 
 
+注意要点:
+* ETCD对configMap限制了写如大小1MB
+* pod 引入的configMap必须是同一个nameSpace. (cm metadata定义了命名空间)
+* 先创建configMap, 在创建pod
+
+
 ### pod 使用ConfigMap
 * pod-with-configmap.yaml
 

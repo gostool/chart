@@ -3,7 +3,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "cm-test"
+  name: "cm-test-env"
   namespace: default
   labels:
     app: "myapp-cm-env"
