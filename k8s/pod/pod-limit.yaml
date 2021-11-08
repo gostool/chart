@@ -13,10 +13,12 @@ spec:
     ports:
       - containerPort: 80
     resources:
-      limits:
-        cpu: 200m
-        memory: 50Mi
+      # 请求
       requests:
-        cpu: 10m
-        memory: 20Mi
+        cpu: 100m
+        memory: 100Mi
+      # 约束
+      limits:
+        cpu: 20m
+        memory: 50Mi
 ---
