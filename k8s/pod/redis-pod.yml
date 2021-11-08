@@ -1,0 +1,31 @@
+# https://kubernetes.io/docs/concepts/workloads/pods/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "redis"
+  namespace: default
+  labels:
+    app: "redis"
+spec:
+  containers:
+  - name: redis
+    image: "debian-slim:latest"
+    resources:
+      limits:
+        cpu: 200m
+        memory: 500Mi
+      requests:
+        cpu: 100m
+        memory: 200Mi
+    ports:
+    - containerPort: 6379
+      name:  tcp
+    volumeMounts:
+    - name: redis-persistent-storage
+      mountPath: /data/redis
+  volumes:
+    - name: redis-persistent-storage
+      hostPath:
+        path: /home/ubuntu/apps/data/redis
+  restartPolicy: Always
+---
