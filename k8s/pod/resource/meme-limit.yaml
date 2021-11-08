@@ -8,7 +8,7 @@ spec:
   - name: memory-demo-2-ctr
     image: polinux/stress
     command: ["stress"]
-    args: ["--vm", "1", "--vm-bytes", "101M", "--vm-hang", "1"]
+    args: ["--vm", "1", "--vm-bytes", "11M", "--vm-hang", "1"]
     resources:
       requests:
         memory: "50Mi"
