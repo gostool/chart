@@ -9,7 +9,7 @@ metadata:
 spec:
   containers:
   - name: redis
-    image: "debian-slim:latest"
+    image: redis
     resources:
       limits:
         cpu: 200m
