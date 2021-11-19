@@ -2,6 +2,11 @@
 
 [文档](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
 
+[生产环境安装](https://kubernetes.io/zh/docs/setup/production-environment/_print/)
+
+
+初始化控制平面节点
+控制平面节点是运行控制平面组件的机器， 包括 etcd （集群数据库） 和 API Server （命令行工具 kubectl 与之通信）。
 ### 查看ubuntu版本号
 
 ```yml
