@@ -1,5 +1,5 @@
 ### dashboard token认证
-[]()
+[参考](https://github.com/kubernetes/dashboard/blob/master/docs/user/access-control/creating-sample-user.md)
 ```sh
 如果没有kubernetes-dashboard这个ns，请先创建
 (venv) ➜  ~ kubectl get ns
