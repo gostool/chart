@@ -1,3 +1,7 @@
+## 使用 kubeadm 创建集群
+
+[文档](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/)
+
 ### 查看ubuntu版本号
 
 ```yml
