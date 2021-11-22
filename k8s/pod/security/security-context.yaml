@@ -1,0 +1,27 @@
+# https://kubernetes.io/zh/docs/tasks/configure-pod-container/security-context/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "security-context-demo"
+  namespace: default
+  labels:
+    app: "security-context-demo"
+spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+  containers:
+  - name: myapp
+    image: busybox
+    command: [ "sh", "-c", "sleep 1h" ]
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath:  /data/demo
+    securityContext:
+      allowPrivilegeEscalation: false
+  volumes:
+    - name: sec-ctx-vol
+      emptyDir: {}
+---
+# kubectl apply -f https://k8s.io/examples/pods/security/security-context.yaml
