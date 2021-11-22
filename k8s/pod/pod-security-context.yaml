@@ -7,6 +7,8 @@ metadata:
   labels:
     app: "security-context-demo"
 spec:
+  securityContext:
+    run
   containers:
   - name: sec-ctx-vol
     image: "debian-slim:latest"
