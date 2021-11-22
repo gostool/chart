@@ -23,19 +23,30 @@ Get the Kubernetes Dashboard URL by running:
 (venv) ➜  ~ export POD_NAME=$(kubectl get pods -n default -l "app.kubernetes.io/name=kubernetes-dashboard,app.kubernetes.io/instance=my-release" -o jsonpath="{.items[0].metadata.name}")
 (venv) ➜  ~ echo https://127.0.0.1:8443/
 https://127.0.0.1:8443/
-(venv) ➜  ~ kubectl -n default port-forward
 (venv) ➜  ~ kubectl -n default port-forward $POD_NAME 8443:8443
 Forwarding from 127.0.0.1:8443 -> 8443
 Forwarding from [::1]:8443 -> 8443
 Handling connection for 8443
 Handling connection for 8443
-^C#                                                                                                                                                                                                                                                                                                                                                 (venv) ➜  ~ kubectl -n default port-forward --address 0.0.0.0 $POD_NAME 8443:8443
+^C#
+(venv) ➜  ~ kubectl -n default port-forward --address 0.0.0.0 $POD_NAME 8443:8443
 Forwarding from 0.0.0.0:8443 -> 8443
 Handling connection for 8443
 Handling connection for 8443
 Handling connection for 8443
 Handling connection for 8443
 Handling connection for 8443
-^C#                                                                                                                                                                                                                                                                                                                                                 (venv) ➜  ~ 
-
+^C#
+(venv) ➜  ~ 
 ```
+
+token 获取:
+```shell
+kubectl -n kubernetes-dashboard get secret $(kubectl -n kubernetes-dashboard get sa/admin-user -o jsonpath="{.secrets[0].name}") -o go-template="{{.data.token | base64decode}}"
+```
+
+浏览器报证书不安全, 使用键盘输入: "thisisunsafe"
+
+token: 登陆界面
+
+![](https://oscimg.oschina.net/oscnet/up-9afb3216da59288662813ab7076660640ef.png)
