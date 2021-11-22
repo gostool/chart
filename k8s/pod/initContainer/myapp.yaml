@@ -1,0 +1,16 @@
+# https://kubernetes.io/zh/docs/concepts/workloads/pods/init-containers/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-init-container-demo
+  labels:
+    name: pod-init-container-demo
+spec:
+  initContainers:
+  - name: init-myservice
+    image: django:latest
+    command: ['sh', '-c', " django-admin version"]
+  containers:
+  - name: django-web-server
+    image: django:latest
+    command: ['sh', '-c', "django-admin startproject web && cd web && ls -l && nohup python manage.py runserver"]
