@@ -35,3 +35,25 @@ Mon Nov 22 08:06:01 UTC 2021
 
 
 ## hostpath
+
+master节点
+```
+(venv) ➜  k8s git:(dev) kubectl get pod
+NAME                                              READY   STATUS    RESTARTS   AGE
+my-release-kubernetes-dashboard-5bf6f9f78-hpp88   1/1     Running   0          2d21h
+pod-volume-demo-hostpath                          1/1     Running   0          93s
+(venv) ➜  k8s git:(dev) kubectl exec -it pod-volume-demo-hostpath  -- sh
+/ # cd /data/
+/data # ls -l
+total 0
+/data # date > a.log
+/data #
+```
+
+worker节点:
+```
+(venv) ➜  cache-volume cat /tmp/data/a.log
+Mon Nov 22 08:24:01 UTC 2021
+(venv) ➜  cache-volume
+```
+删除pod, 目录不会被删除
