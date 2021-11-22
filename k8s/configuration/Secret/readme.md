@@ -7,3 +7,4 @@ Secret 是一种包含少量敏感信息例如密码、令牌或密钥的对象�
 ## Docker 配置 Secret
 
 
+[文档](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/#registry-secret-existing-credentials)
