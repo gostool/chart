@@ -135,6 +135,8 @@ spec:
         - --kubelet-use-node-status-port
         - --metric-resolution=15s
         # image: k8s.gcr.io/metrics-server/metrics-server:v0.5.2
+        # imagePullSecrets:
+        # - name: regcred
         image: registry.cn-beijing.aliyuncs.com/hyhbackend/metrics-server:v0.5.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
