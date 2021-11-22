@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: non-parallel-job
+spec:
+  ttlSecondsAfterFinished: 3
+  template:
+    metadata:
+      name: non-parallel-job
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: non-parallel-job
+        image: busybox
+        command: ['sh', '-c']
+        args: ['echo "Start Job!"; sleep 30; echo "Job Done!"']
