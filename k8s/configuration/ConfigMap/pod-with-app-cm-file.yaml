@@ -3,15 +3,22 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "cm-test"
+  name: "cm-test-file"
   namespace: default
   labels:
-    app: "myapp-cm-env"
+    app: "myapp-cm-file"
 spec:
+  volumes:
+    - name: config
+      configMap:
+        name: app-config
+        # 来自 ConfigMap 的一组键，将被创建为文件. 默认全部挂载.items 指定挂载
+        # items:
+  restartPolicy: Always
   containers:
   - name: myapp-volume-test
     image: "busybox"
-    command: ["/bin/sh", "-c", "ls /etc/config"]
+    command: ["/bin/sh", "-c", "ls -l /etc/config"]
     resources:
       limits:
         cpu: 50m
@@ -19,10 +26,7 @@ spec:
       requests:
         cpu: 50m
         memory: 100Mi
-    volumes:
-      - name: config-volume
-        configMap:
-          name: app-config
-
-  restartPolicy: Always
+    volumeMounts:
+      - name: config
+        mountPath: /etc/config
 ---

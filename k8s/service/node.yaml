@@ -10,6 +10,6 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    nodePort: 30008
+    nodePort: 8001
 
 # kubectl --namespace default port-forward --address 0.0.0.0 service/mysvcnode 8080:80

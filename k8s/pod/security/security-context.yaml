@@ -1,0 +1,48 @@
+# https://kubernetes.io/zh/docs/tasks/configure-pod-container/security-context/
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "security-context-demo"
+  namespace: default
+  labels:
+    app: "security-context-demo"
+spec:
+  securityContext:
+    runAsUser: 1000
+    runAsGroup: 3000
+    fsGroup: 2000
+  containers:
+  - name: myapp
+    image: busybox
+    command: [ "sh", "-c", "sleep 1h" ]
+    volumeMounts:
+    - name: sec-ctx-vol
+      mountPath:  /data/demo
+    securityContext:
+      allowPrivilegeEscalation: false
+  volumes:
+    - name: sec-ctx-vol
+      emptyDir: {}
+---
+# kubectl apply -f https://k8s.io/examples/pods/security/security-context.yaml
+# 检查 Pod 的容器处于运行状态： kubectl get pod security-context-demo
+# 开启一个 Shell 进入到运行中的容器: kubectl exec -it security-context-demo -- sh
+# (venv) ➜  chart git:(dev) kubectl exec -it security-context-demo -- sh
+# / $ ps
+# PID   USER     TIME  COMMAND
+#     1 1000      0:00 sleep 1h
+#     7 1000      0:00 sh
+#    14 1000      0:00 ps
+# / $ cd /data/
+# /data $ ls -l
+# total 4
+# drwxrwsrwx    2 root     2000          4096 Nov 22 03:48 demo
+# /data $ cd demo/
+# /data/demo $ echo hello > testfile
+# /data/demo $ ls -l
+# total 4
+# -rw-r--r--    1 1000     2000             6 Nov 22 03:50 testfile
+# /data/demo $ id
+# uid=1000 gid=3000 groups=2000
+# /data/demo $ exit
+# (venv) ➜  chart git:(dev)

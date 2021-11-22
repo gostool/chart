@@ -18,5 +18,5 @@
 **/venv/*
 **/__pycache__/*
 **/.idea/*
-k8s/compose/app2/*yarn*
-k8s/compose/app2/node_modules/
+**/yarn*
+**/node_modules/*

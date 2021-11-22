@@ -3,15 +3,15 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "cm-test-env"
+  name: "cm-test-from"
   namespace: default
   labels:
-    app: "myapp-cm-env"
+    app: "myapp-cm-from"
 spec:
   containers:
-  - name: myapp-env-test
+  - name: myapp-from-test
     image: "busybox"
-    command: ["/bin/sh", "-c", "env"]
+    command: ["/bin/sh", "-c", "echo $()"]
     resources:
       limits:
         cpu: 50m
@@ -25,10 +25,6 @@ spec:
         configMapKeyRef:
           name: app-config
           key: app.how
-    - name: REDIS
-      valueFrom:
-        configMapKeyRef:
-          name: app-config
-          key: app.redis
+  
   restartPolicy: Always
 ---
