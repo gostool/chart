@@ -15,5 +15,9 @@ helm install my-kubernetes-dashboard k8s-dashboard/kubernetes-dashboard --versio
 
 [github源码](https://github.com/kubernetes/dashboard/blob/master/src/app/backend/auth/api/types.go#L29)
 
+![更新失败](../../../docs/img/pod-dashboard-ttl.jpg)
+
+
+使用yaml安装
 
 
