@@ -35,6 +35,14 @@ Mon Nov 22 08:06:01 UTC 2021
 
 
 ## hostpath
+[文档](https://kubernetes.io/zh/docs/concepts/storage/volumes/#hostpath)
+
+HostPath 卷存在许多安全风险，最佳做法是尽可能避免使用 HostPath。 
+当必须使用 HostPath 卷时，它的范围应仅限于所需的文件或目录，并以只读方式挂载。
+
+hostPath 的一些用法有
+* 运行一个需要访问 Docker 内部机制的容器；可使用 hostPath 挂载 /var/lib/docker 路径。
+* 容器中运行 cAdvisor 时，以 hostPath 方式挂载 /sys
 
 master节点
 ```
