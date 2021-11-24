@@ -21,3 +21,42 @@ helm install my-kubernetes-dashboard k8s-dashboard/kubernetes-dashboard --versio
 使用yaml安装
 
 
+
+## sh
+
+1.查看kubernetes-dashboard命名空间下的pod
+```
+(venv) ➜  ~ kubectl get pod -n kubernetes-dashboard
+NAME                                        READY   STATUS    RESTARTS   AGE
+dashboard-metrics-scraper-c45b7869d-5dpmm   1/1     Running   0          12h
+kubernetes-dashboard-7c5bb7b588-k9ggq       1/1     Running   0          12h
+(venv) ➜  ~
+```
+
+2.使用label选中kubernetes-dashboard的pod
+```
+(venv) ➜  ~ kubectl get pod -n kubernetes-dashboard -l "k8s-app=kubernetes-dashboard"
+NAME                                    READY   STATUS    RESTARTS   AGE
+kubernetes-dashboard-7c5bb7b588-k9ggq   1/1     Running   0          12h
+(venv) ➜  ~
+```
+
+
+3.获取pod name
+
+```
+export POD_NAME=$(kubectl get pods -n kubernetes-dashboard  -l "k8s-app=kubernetes-dashboard" -o jsonpath="{.items[0].metadata.name}")
+```
+
+4.暴漏服务
+```
+kubectl -n kubernetes-dashboard port-forward --address 0.0.0.0 $(POD_NAME) 8443:8443
+```
+
+
+sh:
+```
+kubectl -n kubernetes-dashboard port-forward --address 0.0.0.0 $(kubectl get pods -n kubernetes-dashboard  -l "k8s-app=kubernetes-dashboard" -o jsonpath="{.items[0].metadata.name}") 8443:8443
+```
+
+
