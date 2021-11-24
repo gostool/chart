@@ -44,3 +44,7 @@ PVC: 简化User对存储的需要. (接口)
 
 - 第一种方式：我们可以新建一个 PV 对象，然后把之前的 released 的 PV 的相关字段的信息填到新的 PV 对象里面，这样的话，这个 PV 就可以结合新的 PVC 了；
 - 第二种是我们在删除 pod 之后，不要去删除 PVC 对象，这样给 PV 绑定的 PVC 还是存在的，下次 pod 使用的时候，就可以直接通过 PVC 去复用。K8s中的 StatefulSet 管理的 Pod 带存储的迁移就是通过这种方式。
+
+## Snapshot && Topolopy
+[snapshot](https://kubernetes.io/zh/docs/concepts/storage/volume-snapshots/)
+[toplplpy](https://edu.aliyun.com/lesson_1651_18358#_18358)
