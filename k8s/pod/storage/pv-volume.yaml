@@ -9,7 +9,7 @@ metadata:
 spec:
   storageClassName: manual
   capacity:
-    storage: 1Gi
+    storage: 4Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
@@ -20,3 +20,7 @@ spec:
 # sudo sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
 # kubectl apply -f https://k8s.io/examples/pods/storage/pv-volume.yaml
 # kubectl get pv task-pv-volume
+# (venv) ➜  k8s git:(dev) kubectl get pv -o wide
+# NAME             CAPACITY   ACCESS MODES   RECLAIM POLICY   STATUS      CLAIM   STORAGECLASS   REASON   AGE   VOLUMEMODE
+# task-pv-volume   1Gi        RWO            Retain           Available           manual                  20s   Filesystem
+# (venv) ➜  k8s git:(dev)

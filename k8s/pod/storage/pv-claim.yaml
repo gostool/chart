@@ -1,0 +1,21 @@
+# https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: task-pv-claim
+  namespace: default
+  labels:
+    app: task-pv-claim
+spec:
+  # AKS: default,managed-premium
+  # GKE: standard
+  # EKS: gp2 (custom)
+  # Rook: rook-ceph-block,rook-ceph-fs
+  storageClassName: manual
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
