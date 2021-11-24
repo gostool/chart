@@ -1,0 +1,22 @@
+# https://raw.githubusercontent.com/kubernetes/website/main/content/zh/examples/pods/storage/pv-volume.yaml
+# https://kubernetes.io/zh/docs/tasks/configure-pod-container/configure-persistent-volume-storage/
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: task-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+
+# sudo mkdir /mnt/data
+# sudo sh -c "echo 'Hello from Kubernetes storage' > /mnt/data/index.html"
+# kubectl apply -f https://k8s.io/examples/pods/storage/pv-volume.yaml
+# kubectl get pv task-pv-volume
