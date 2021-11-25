@@ -10,8 +10,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.1.0"
   containerPort: 8000
-
-imagePullSecrets: [regcred]
+# https://stackoverflow.com/questions/62901288/how-to-use-imagepullsecrets-in-helm-3
+imagePullSecrets:
+  - name: regcred
 nameOverride: ""
 fullnameOverride: ""
 
@@ -22,7 +23,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "mychart-web"
 
 podAnnotations: {}
 
