@@ -5,12 +5,12 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: registry.cn-beijing.aliyuncs.com/hyhbackend/web
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "0.1.0"
 
-imagePullSecrets: []
+imagePullSecrets: [regcred]
 nameOverride: ""
 fullnameOverride: ""
 
