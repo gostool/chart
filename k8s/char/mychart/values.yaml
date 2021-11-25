@@ -9,6 +9,7 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.1.0"
+  containerPort: 8000
 
 imagePullSecrets: [regcred]
 nameOverride: ""
@@ -39,6 +40,7 @@ securityContext: {}
 service:
   type: ClusterIP
   port: 80
+  targetPort: 8000
 
 ingress:
   enabled: false
