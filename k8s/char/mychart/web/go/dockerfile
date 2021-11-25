@@ -1,0 +1,22 @@
+FROM golang:latest AS build-env
+
+ARG PROJ_NAME="web"
+ARG BIN="main"
+# 容器环境变量添加，会覆盖默认的变量值
+# ENV GO111MODULE=on
+ENV GOPROXY=https://goproxy.cn,direct
+
+WORKDIR $GOPATH/src/${PROJ_NAME}
+ADD . $GOPATH/src/${PROJ_NAME}
+
+
+# RUN mkdir -p /output && go build -o /output/main
+RUN go mod init && mkdir -p /output && go build -o /output/${BIN}
+
+
+FROM alpine:latest
+WORKDIR /app
+# RUN apk update && apk add curl bash tree tzdata \
+#     && cp -r -f /usr/share/zoneinfo/Hongkong /etc/localtime
+COPY --from=build-env /output/${BIN} /app/
+CMD ["/app/main"]
