@@ -11,7 +11,8 @@ image:
   tag: "0.1.0"
   containerPort: 8000
 
-imagePullSecrets: [regcred]
+imagePullSecrets:
+  - regcred
 nameOverride: ""
 fullnameOverride: ""
 
