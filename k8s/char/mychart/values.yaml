@@ -10,9 +10,9 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: "0.1.0"
   containerPort: 8000
-
+# https://stackoverflow.com/questions/62901288/how-to-use-imagepullsecrets-in-helm-3
 imagePullSecrets:
-  - regcred
+  - name: regcred
 nameOverride: ""
 fullnameOverride: ""
 
