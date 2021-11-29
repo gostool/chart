@@ -3,5 +3,5 @@ kind: ConfigMap
 metadata:
   name: {{.Release.Name}}-configmap
 data:
-  drink: {{.Values.favorite.drink | quote}}
+  drink: {{.Values.favorite.drink | repeat 5  | quote}}
   food: {{.Values.favorite.food | upper | quote}}
