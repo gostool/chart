@@ -6,3 +6,4 @@ data:
   drink: {{.Values.favorite.drink | repeat 5  | quote}}
   food: {{.Values.favorite.food | upper | quote}}
   key: {{.Values.favorite.drink | default "tea" | quote}}
+  key2: {{.Values.favorite.drink | default (printf "%s-tea" (include "fullname" .)) }}
