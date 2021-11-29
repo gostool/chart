@@ -4,4 +4,4 @@ metadata:
   name: {{.Release.Name}}-configmap
 data:
   drink: {{.Values.favorite.drink | quote}}
-  food: {{.Values.favorite.food | quote}}
+  food: {{.Values.favorite.food | upper | quote}}
