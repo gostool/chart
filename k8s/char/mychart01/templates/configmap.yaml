@@ -5,3 +5,4 @@ metadata:
 data:
   drink: {{.Values.favorite.drink | repeat 5  | quote}}
   food: {{.Values.favorite.food | upper | quote}}
+  key: {{.Values.favorite.drink | default "tea" | quote}}
