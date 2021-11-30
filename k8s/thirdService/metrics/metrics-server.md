@@ -16,3 +16,9 @@ helm install metrics-server metrics-server/metrics-server
 ```
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
 ```
+
+
+## x509
+
+[x509 issue](https://github.com/kubernetes-sigs/metrics-server/issues/131)
+
