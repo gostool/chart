@@ -26,7 +26,7 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 
 下载yaml后，手动修改镜像.
 
-## x509
+### x509
 
 [x509 issue](https://github.com/kubernetes-sigs/metrics-server/issues/131)
 
@@ -39,3 +39,34 @@ kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/late
 ```
 
 在args中增加`--kubelet-insecure-tls`参数.
+
+
+### 查看
+
+```
+(venv) ➜  k8s git:(dev) kubectl top
+Display Resource (CPU/Memory) usage.
+
+ The top command allows you to see the resource consumption for nodes or pods.
+
+ This command requires Metrics Server to be correctly configured and working on the server.
+
+Available Commands:
+  node        Display resource (CPU/memory) usage of nodes
+  pod         Display resource (CPU/memory) usage of pods
+
+Usage:
+  kubectl top [flags] [options]
+
+Use "kubectl <command> --help" for more information about a given command.
+Use "kubectl options" for a list of global command-line options (applies to all commands).
+(venv) ➜  k8s git:(dev) kubectl top node
+NAME          CPU(cores)   CPU%   MEMORY(bytes)   MEMORY%
+master-node   123m         6%     2104Mi          54%
+worker01      71m          3%     1273Mi          33%
+(venv) ➜  k8s git:(dev) kubectl top pod
+NAME                     CPU(cores)   MEMORY(bytes)
+nginx-6799fc88d8-nsqcz   0m           3Mi
+task-pv-pod              0m           3Mi
+(venv) ➜  k8s git:(dev)
+```
