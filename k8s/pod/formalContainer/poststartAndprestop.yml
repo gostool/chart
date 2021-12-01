@@ -19,4 +19,5 @@ spec:
       preStop:
         exec:
           command: ['sh', '-c', 'echo "preStop callback done!"; sleep 60']
-    restartPolicy: OnFailure
+  restartPolicy: OnFailure
+
