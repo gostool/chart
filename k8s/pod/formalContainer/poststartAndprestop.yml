@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: examplePodForPostStartAndPreStop
+  name: examplepodforpoststartandprestop
 spec:
   containers:
-  - name: postStartAndPreStop-container
+  - name: poststartandprestop-container
     image: busybox
     imagePullPolicy: IfNotPresent
     command: ['sh', '-c']
