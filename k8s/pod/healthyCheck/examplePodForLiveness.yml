@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: examplepodforliveness
+spec:
+  containers:
+    - name: livenesscontainer
+      image: busybox
+      imagePullPolicy: IfNotPresent
+      command: ['sh', '-c']
+      args: ['mkdir /files_dir; echo "important data" > /files_dir/importfile; sleep 3600']
+      livenessProbe:
+        exec:
+          command: ['cat', 'files_dir/importantfile']
