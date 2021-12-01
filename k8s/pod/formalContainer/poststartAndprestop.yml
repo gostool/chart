@@ -12,10 +12,11 @@ spec:
     lifecycle:
       postStart:
         httpGet:
-          host: www.baidu.com
+          host: www.baiduxx.com
           path: /
           port: 80
           scheme: HTTP
       preStop:
         exec:
           command: ['sh', '-c', 'echo "preStop callback done!"; sleep 60']
+    restartPolicy: OnFailure
