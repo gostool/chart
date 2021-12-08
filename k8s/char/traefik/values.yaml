@@ -335,7 +335,7 @@ tlsOptions: {}
 # Options for the main traefik service, where the entrypoints traffic comes
 # from.
 service:
-  enabled: true
+  enabled: false
   type: LoadBalancer
   # Additional annotations applied to both TCP and UDP services (e.g. for cloud provider specific config)
   annotations: {}
