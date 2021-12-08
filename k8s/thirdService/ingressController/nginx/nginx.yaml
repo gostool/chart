@@ -272,11 +272,12 @@ metadata:
   name: ingress-nginx-controller
   namespace: ingress-nginx
 spec:
-  type: LoadBalancer
-  externalTrafficPolicy: Local
-  ipFamilyPolicy: SingleStack
-  ipFamilies:
-    - IPv4
+  # type: LoadBalancer
+  # externalTrafficPolicy: Local
+  # ipFamilyPolicy: SingleStack
+  # ipFamilies:
+  #   - IPv4
+  type: NodePort
   ports:
     - name: http
       port: 80
