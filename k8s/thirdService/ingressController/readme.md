@@ -1,6 +1,8 @@
 # ingress 技术选型
 * nginx-ingress: nginx 出品 
 
+
+
 ## nginx-ingress
 [文档](https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-manifests/)
 
