@@ -612,7 +612,7 @@ spec:
       containers:
         - name: create
           # image: k8s.gcr.io/ingress-nginx/kube-webhook-certgen:v1.1.1
-          images: registry.cn-beijing.aliyuncs.com/hyhbackend/ingress-nginx-kube-webhook-certgen:v1.1.1
+          image: registry.cn-beijing.aliyuncs.com/hyhbackend/ingress-nginx-kube-webhook-certgen:v1.1.1
           imagePullPolicy: IfNotPresent
           args:
             - create
