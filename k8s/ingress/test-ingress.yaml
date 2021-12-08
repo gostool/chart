@@ -7,6 +7,6 @@ metadata:
 spec:
   defaultBackend:
     service:
-      name: test
+      name: httpd-service
       port:
         number: 80
