@@ -2,7 +2,7 @@
 image:
   name: traefik
   # defaults to appVersion
-  tag: ""
+  tag: "2.5.4"
   pullPolicy: IfNotPresent
 
 #
@@ -247,7 +247,7 @@ ports:
   traefik:
     port: 9000
     # Use hostPort if set.
-    # hostPort: 9000
+    hostPort: 9000
     #
     # Use hostIP if set. If not set, Kubernetes will default to 0.0.0.0, which
     # means it's listening on all your interfaces and all your IPs. You may want
@@ -272,8 +272,8 @@ ports:
     protocol: TCP
   web:
     port: 8000
-    # hostPort: 8000
-    expose: true
+    hostPort: 8000
+    expose: false
     exposedPort: 80
     # The port protocol (TCP/UDP)
     protocol: TCP
@@ -286,8 +286,8 @@ ports:
     # redirectTo: websecure
   websecure:
     port: 8443
-    # hostPort: 8443
-    expose: true
+    hostPort: 9443
+    expose: false
     exposedPort: 443
     # The port protocol (TCP/UDP)
     protocol: TCP
@@ -306,7 +306,7 @@ ports:
       #     - bar.example.com
   metrics:
     port: 9100
-    # hostPort: 9100
+    hostPort: 9100
     # Defines whether the port is exposed if service.type is LoadBalancer or
     # NodePort.
     #
