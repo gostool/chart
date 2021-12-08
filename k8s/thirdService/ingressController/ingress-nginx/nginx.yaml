@@ -278,6 +278,7 @@ spec:
   # ipFamilies:
   #   - IPv4
   type: NodePort
+  # hostNetwork: true
   ports:
     - name: http
       port: 80
