@@ -86,3 +86,13 @@ redis-slave-wh4ps    1/1     Running   0          23h
 ➜  k8s git:(dev)
 ```
 
+## 给节点打标签
+
+```(venv) ➜  traefik git:(dev) kubectl label nodes worker01 IngressProxy=True
+node/worker01 labeled
+(venv) ➜  traefik git:(dev) kubectl get nodes --show-labels
+NAME          STATUS   ROLES                  AGE   VERSION   LABELS
+master-node   Ready    control-plane,master   22d   v1.22.3   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master-node,kubernetes.io/os=linux,node-role.kubernetes.io/control-plane=,node-role.kubernetes.io/master=,node.kubernetes.io/exclude-from-external-load-balancers=
+worker01      Ready    <none>                 21d   v1.22.3   IngressProxy=True,beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=worker01,kubernetes.io/os=linux
+(venv) ➜  traefik git:(dev)
+```
