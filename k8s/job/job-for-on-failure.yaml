@@ -1,0 +1,15 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: examplejobforonfailure
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      restartPolicy: Never
+      # restartPolicy: OnFailure
+      containers:
+      - name: examplejobforonfailurecontainer
+        image: busybox
+        command: ['sh', '-c']
+        args: ['this is error commands!!']

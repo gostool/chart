@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: examplejobfordeadline
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      activeDeadlineSeconds: 10 
+      containers:
+      - name: examplejobfordeadlinecontainer
+        image: busybox
+        command: ['sh', '-c']
+        args: ['echo "Hello Kubernetes!; sleep 3600"']
