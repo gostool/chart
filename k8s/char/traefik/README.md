@@ -97,12 +97,12 @@ If you want to contribute to this chart, please read the [Contributing Guide](..
 
 [教程](https://network.51cto.com/art/202111/689466.htm)
 
-1.获取chart 10.6.0 版本
+### 1.获取chart 10.6.0 版本
 ```
 helm pull traefik/traefik  --version 10.6.0 --untar
 ```
 
-2.helm install
+### 2.helm install
 ```
 (venv) ➜  char git:(dev) helm install traefik traefik/ -n traefik-ingress -f traefik/my-value.yaml
 NAME: traefik
@@ -115,7 +115,13 @@ TEST SUITE: None
 NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
 ```
 
-3.查看
+### 3.查看svc和其他组件
+svc:
+* dashboard: ip:9000 -> 公网ip:30466
+* 80:                   公网ip:30525
+* 443:                  公网ip:30758
+
+
 ```
 (venv) ➜  char git:(dev) kubectl get all -n traefik-ingress -o wide
 NAME                           READY   STATUS              RESTARTS   AGE   IP       NODE       NOMINATED NODE   READINESS GATES
@@ -144,7 +150,10 @@ replicaset.apps/traefik-5bd4d8d6cd   1         1         1       61s   traefik  
 (venv) ➜  char git:(dev)
 ```
 
-4.访问svc. 使用公务ip或域名访问30466
+### 4.访问svc. 
+使用公务ip或域名访问30466
+
+先在内网测试:
 ```
 venv) ➜  char git:(dev) kubectl get svc -n traefik-ingress
 NAME      TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                                     AGE
@@ -168,4 +177,32 @@ traefik   NodePort   10.106.81.178   <none>        9000:30466/TCP,80:30525/TCP,4
 * Connection #0 to host 10.106.81.178 left intact
 Moved Permanently# 
 (venv) ➜  char git:(dev)
+```
+
+云主机开放对应端口:
+```
+(venv) ➜  char git:(dev) curl -v http://k8s.pyhuo.top:30466
+*   Trying 8.142.109.91:30466...
+* TCP_NODELAY set
+* Connected to k8s.pyhuo.top (8.142.109.91) port 30466 (#0)
+> GET / HTTP/1.1
+> Host: k8s.pyhuo.top:30466
+> User-Agent: curl/7.68.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 301 Moved Permanently
+< Location: http://k8s.pyhuo.top:30466/dashboard/
+< Date: Thu, 09 Dec 2021 06:23:05 GMT
+< Content-Length: 17
+< Content-Type: text/plain; charset=utf-8
+<
+* Connection #0 to host k8s.pyhuo.top left intact
+Moved Permanently# 
+(venv) ➜  char git:(dev)
+```
+
+## 部署whoami 测试
+
+```
 ```

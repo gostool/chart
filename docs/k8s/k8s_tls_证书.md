@@ -18,3 +18,7 @@ kubectl create secret tls whoami-tls --cert=6758654_k8s.pyhuo.top.pem --key=6758
 ## 实践:whoami 提供https
 
 ![whoami tls](../img/whoamitls.png)
+
+yaml:  ingress/traefik/whoami-xxx.yaml
+
+
