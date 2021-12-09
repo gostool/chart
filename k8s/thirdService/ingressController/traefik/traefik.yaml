@@ -24,7 +24,7 @@ spec:
       # nodeSelector:
       #   kubernetes.io/hostname: master
       containers:
-      - image: traefik:v2.2
+      - image: traefik:v2.5.4
         name: traefik-ingress-lb
         ports:
         - name: http
