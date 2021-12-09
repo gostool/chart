@@ -143,3 +143,29 @@ NAME                                 DESIRED   CURRENT   READY   AGE   CONTAINER
 replicaset.apps/traefik-5bd4d8d6cd   1         1         1       61s   traefik      traefik:2.5.3   app.kubernetes.io/instance=traefik,app.kubernetes.io/name=traefik,pod-template-hash=5bd4d8d6cd
 (venv) ➜  char git:(dev)
 ```
+
+4.访问svc. 使用公务ip或域名访问30466
+```
+venv) ➜  char git:(dev) kubectl get svc -n traefik-ingress
+NAME      TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                                     AGE
+traefik   NodePort   10.106.81.178   <none>        9000:30466/TCP,80:30525/TCP,443:30758/TCP   4m20s
+(venv) ➜  char git:(dev) curl -v 10.106.81.178:9000
+*   Trying 10.106.81.178:9000...
+* TCP_NODELAY set
+* Connected to 10.106.81.178 (10.106.81.178) port 9000 (#0)
+> GET / HTTP/1.1
+> Host: 10.106.81.178:9000
+> User-Agent: curl/7.68.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 301 Moved Permanently
+< Location: http://10.106.81.178:9000/dashboard/
+< Date: Thu, 09 Dec 2021 02:59:05 GMT
+< Content-Length: 17
+< Content-Type: text/plain; charset=utf-8
+<
+* Connection #0 to host 10.106.81.178 left intact
+Moved Permanently# 
+(venv) ➜  char git:(dev)
+```
