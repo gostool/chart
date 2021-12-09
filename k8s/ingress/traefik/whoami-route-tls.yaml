@@ -1,14 +1,16 @@
-# cat ingressroute.yaml  
+# cat ingressroutetls.yaml  
 apiVersion: traefik.containo.us/v1alpha1 
 kind: IngressRoute 
 metadata: 
-  name: whoami-route 
+  name: whoami-route-tls 
 spec: 
   entryPoints: 
-  - web 
+  - websecure 
   routes: 
   - match: Host(`k8s.pyhuo.top`) 
     kind: Rule 
     services: 
       - name: whoami 
         port: 80  
+  tls: 
+    secretName: whoami-tls 
