@@ -91,3 +91,55 @@ spec:
 ## Contributing
 
 If you want to contribute to this chart, please read the [Contributing Guide](../CONTRIBUTING.md).
+
+
+## 实践记录
+
+[教程](https://network.51cto.com/art/202111/689466.htm)
+
+1.获取chart 10.6.0 版本
+```
+helm pull traefik/traefik  --version 10.6.0 --untar
+```
+
+2.helm install
+```
+(venv) ➜  char git:(dev) helm install traefik traefik/ -n traefik-ingress -f traefik/my-value.yaml
+NAME: traefik
+LAST DEPLOYED: Thu Dec  9 10:54:31 2021
+NAMESPACE: traefik-ingress
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+(venv) ➜  char git:(dev) helm ls
+NAME	NAMESPACE	REVISION	UPDATED	STATUS	CHART	APP VERSION
+```
+
+3.查看
+```
+(venv) ➜  char git:(dev) kubectl get all -n traefik-ingress -o wide
+NAME                           READY   STATUS              RESTARTS   AGE   IP       NODE       NOMINATED NODE   READINESS GATES
+pod/traefik-5bd4d8d6cd-b765z   0/1     ContainerCreating   0          13s   <none>   worker01   <none>           <none>
+
+NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                                     AGE   SELECTOR
+service/traefik   NodePort   10.106.81.178   <none>        9000:30466/TCP,80:30525/TCP,443:30758/TCP   13s   app.kubernetes.io/instance=traefik,app.kubernetes.io/name=traefik
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES          SELECTOR
+deployment.apps/traefik   0/1     1            0           13s   traefik      traefik:2.5.3   app.kubernetes.io/instance=traefik,app.kubernetes.io/name=traefik
+
+NAME                                 DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES          SELECTOR
+replicaset.apps/traefik-5bd4d8d6cd   1         1         0       13s   traefik      traefik:2.5.3   app.kubernetes.io/instance=traefik,app.kubernetes.io/name=traefik,pod-template-hash=5bd4d8d6cd
+(venv) ➜  char git:(dev) kubectl get all -n traefik-ingress -o wide
+NAME                           READY   STATUS    RESTARTS   AGE   IP             NODE       NOMINATED NODE   READINESS GATES
+pod/traefik-5bd4d8d6cd-b765z   1/1     Running   0          61s   10.244.1.116   worker01   <none>           <none>
+
+NAME              TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)                                     AGE   SELECTOR
+service/traefik   NodePort   10.106.81.178   <none>        9000:30466/TCP,80:30525/TCP,443:30758/TCP   61s   app.kubernetes.io/instance=traefik,app.kubernetes.io/name=traefik
+
+NAME                      READY   UP-TO-DATE   AVAILABLE   AGE   CONTAINERS   IMAGES          SELECTOR
+deployment.apps/traefik   1/1     1            1           61s   traefik      traefik:2.5.3   app.kubernetes.io/instance=traefik,app.kubernetes.io/name=traefik
+
+NAME                                 DESIRED   CURRENT   READY   AGE   CONTAINERS   IMAGES          SELECTOR
+replicaset.apps/traefik-5bd4d8d6cd   1         1         1       61s   traefik      traefik:2.5.3   app.kubernetes.io/instance=traefik,app.kubernetes.io/name=traefik,pod-template-hash=5bd4d8d6cd
+(venv) ➜  char git:(dev)
+```
