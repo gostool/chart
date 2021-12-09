@@ -1,0 +1,15 @@
+# cat traefik-ingressRoute.yaml  
+apiVersion: traefik.containo.us/v1alpha1 
+kind: IngressRoute 
+metadata: 
+  name: traefik-dashboard-route 
+  
+spec: 
+  entryPoints: 
+  - web 
+  routes: 
+  - match: Host(`k8s.pyhuo.top`) 
+    kind: Rule 
+    services: 
+      - name: traefik 
+        port: 9000  

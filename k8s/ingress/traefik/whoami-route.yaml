@@ -1,0 +1,14 @@
+# cat ingressroute.yaml  
+apiVersion: traefik.containo.us/v1alpha1 
+kind: IngressRoute 
+metadata: 
+  name: whoami-route 
+spec: 
+  entryPoints: 
+  - web 
+  routes: 
+  - match: Host(`k8s.pyhuo.top`) 
+    kind: Rule 
+    services: 
+      - name: whoami 
+        port: 80  

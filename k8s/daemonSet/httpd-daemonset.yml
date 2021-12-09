@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: exampledaemonset
+spec:
+  selector:
+    matchLabels:
+      example: deploymentforhttpd
+  template:
+    metadata:
+      labels: 
+        example: deploymentforhttpd
+    spec:
+      containers:
+      - name: httpd
+        image: httpd:2.2
+        ports:
+        - containerPort: 80
+          hostPort: 8082
+          protocol: TCP
+  # updateStrategy:
+  #   type: OnDelete/RollingUpdate

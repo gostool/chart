@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  traefik:
+    image: traefik:v2.2
+    command: --api.insecure=true --providers.docker
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  
+  # 改镜像会暴露出自身的 `header` 信息
+  whoami:
+    image: containous/whoami
+    labels:
+      # 设置Host 为 whoami.docker.localhost 进行域名访问
+      - "traefik.http.routers.whoami.rule=Host(`whoami.docker.localhost`)"
