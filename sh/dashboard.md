@@ -24,3 +24,9 @@ Nov 24 11:25:58 master-node dashboard.sh[3935207]: will start dashboard
 Nov 24 11:25:59 master-node dashboard.sh[3935233]: Forwarding from 0.0.0.0:8443 -> 8443
 (venv) ➜  sh
 ```
+
+
+## 部署和访问 Kubernetes 仪表板（Dashboard）
+
+[doc](https://kubernetes.io/zh-cn/docs/tasks/access-application-cluster/web-ui-dashboard/)
+

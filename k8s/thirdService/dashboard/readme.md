@@ -59,4 +59,21 @@ sh:
 kubectl -n kubernetes-dashboard port-forward --address 0.0.0.0 $(kubectl get pods -n kubernetes-dashboard  -l "k8s-app=kubernetes-dashboard" -o jsonpath="{.items[0].metadata.name}") 8443:8443
 ```
 
+## dashboard url
+[link](https://k8s.pyhuo.top:8443/#/workloads?namespace=_all)
 
+
+## token
+
+
+```
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep kubernetes-dashboard | awk '{print $1}')
+```
+
+
+```
+kubectl -n kubernetes-dashboard describe secret $(kubectl -n kubernetes-dashboard get secret | grep kubernetes-dashboard | awk '{print $1}')
+```
+
+
+[参考文档](https://segmentfault.com/a/1190000023130407)
